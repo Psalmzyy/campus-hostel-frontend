@@ -39,3 +39,10 @@ Built with:
 3. Run backend locally: cd campus-hostel-backend npm install node server.js
 
 
+Name: [Daniel Kingsley Bright Amusah]
+
+Institution: Academic City University College
+
+Course: IT2239 Web Technologies and Development
+
+
