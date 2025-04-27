@@ -9,13 +9,16 @@ async function loadApplications() {
 
   applications.forEach(app => {
     const div = document.createElement('div');
+    div.setAttribute('id', `application-${app.id}`);
     div.innerHTML = `
       <p><b>Student ID:</b> ${app.studentId}</p>
       <p><b>Room Preference:</b> ${app.roomPreference}</p>
       <p><b>Details:</b> ${app.personalDetails}</p>
       <p><b>Status:</b> ${app.status}</p>
-      <button onclick="decideApplication(${app.id}, 'approved')" class="btn">Approve</button>
-      <button onclick="decideApplication(${app.id}, 'rejected')" class="btn">Reject</button>
+      ${app.status === 'pending' ? `
+        <button onclick="decideApplication(${app.id}, 'approved')" class="btn">Approve</button>
+        <button onclick="decideApplication(${app.id}, 'rejected')" class="btn">Reject</button>
+      ` : `<p><b>Decision:</b> ${app.status.toUpperCase()}</p>`}
       <hr>
     `;
     applicationList.appendChild(div);
@@ -32,7 +35,13 @@ async function decideApplication(id, decision) {
 
   if (response.ok) {
     alert(`Application ${decision}`);
-    loadApplications();
+    // After decision, reload only that specific application card
+    const applicationDiv = document.getElementById(`application-${id}`);
+    applicationDiv.innerHTML = `
+      <p><b>Application ID:</b> ${id}</p>
+      <p><b>Decision:</b> ${decision.toUpperCase()}</p>
+      <hr>
+    `;
   } else {
     alert('Failed to update application.');
   }
@@ -47,5 +56,4 @@ if (document.getElementById('applicationList')) {
 function logout() {
     localStorage.removeItem('user');
     window.location.href = 'login.html';
-  }
-  
+}
