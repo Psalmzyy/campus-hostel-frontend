@@ -6,16 +6,23 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <div class="navbar">
+    <a href="index.html" target="_blank">Home</a>
+    <a href="dashboard.html" target="_blank">Dashboard</a>
+    <a href="login.html" onclick="logout()" target="_blank">Logout</a>
+  </div>
+
   <div class="container">
     <h2>Dashboard</h2>
     <div id="hostelList"></div>
+
     <h3>Apply for Hostel</h3>
     <form id="applicationForm">
       <input type="text" id="roomPreference" placeholder="Room Preference" required><br>
       <textarea id="personalDetails" placeholder="Personal Details" required></textarea><br>
       <button type="submit" class="btn">Apply</button>
     </form>
-    <button onclick="logout()" class="btn">Logout</button>
   </div>
 
   <script src="js/hostel.js"></script>

@@ -6,10 +6,16 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <div class="navbar">
+    <a href="index.html" target="_blank">Home</a>
+    <a href="admin.html" target="_blank">Admin</a>
+    <a href="login.html" onclick="logout()" target="_blank">Logout</a>
+  </div>
+
   <div class="container">
     <h2>Admin Dashboard</h2>
     <div id="applicationList"></div>
-    <button onclick="logout()" class="btn">Logout</button>
   </div>
 
   <script src="js/dashboard.js"></script>

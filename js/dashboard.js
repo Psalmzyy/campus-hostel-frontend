@@ -42,3 +42,10 @@ async function decideApplication(id, decision) {
 if (document.getElementById('applicationList')) {
   loadApplications();
 }
+
+//Logout function
+function logout() {
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+  }
+  
