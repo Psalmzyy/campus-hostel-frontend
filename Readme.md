@@ -10,6 +10,7 @@ Built with:
 
 ## Deployment Links
 - **Frontend (GitHub Pages):** [Click Here](https://github.com/Psalmzyy/campus-hostel-frontend)
+- **Backend (GitHub Pages):** [Click Here](https://github.com/Psalmzyy/campus-hostel-backend)
 - **Backend (Render):** [Click Here](https://campus-hostel-backend-2po4.onrender.com)
 
 ## Login Details
