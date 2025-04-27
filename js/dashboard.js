@@ -1,43 +1,28 @@
-const backendURL = 'https://campus-hostel-backend-2po4.onrender.com'; // Replace with real backend url
+const backendURL = 'https://campus-hostel-backend-2po4.onrender.com'; // Update after deployment
 
 // Load Applications
 async function loadApplications() {
-  try {
-    const response = await fetch(`${backendURL}/api/applications`);
-    const applications = await response.json();
-    const applicationList = document.getElementById('applicationList');
-    applicationList.innerHTML = '';
+  const response = await fetch(`${backendURL}/api/applications`);
+  const applications = await response.json();
+  const applicationList = document.getElementById('applicationList');
+  applicationList.innerHTML = '';
 
-    if (applications.length === 0) {
-      applicationList.innerHTML = "<p>No applications yet.</p>";
-      return;
-    }
-
-    applications.forEach(app => {
-      const div = document.createElement('div');
-      div.classList.add('application-card');
-      div.innerHTML = `
-        <p><b>Student ID:</b> ${app.studentId}</p>
-        <p><b>Room Preference:</b> ${app.roomPreference}</p>
-        <p><b>Details:</b> ${app.personalDetails}</p>
-        <p><b>Status:</b> ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}</p>
-        <div class="buttons" id="buttons-${app.id}">
-          ${app.status === 'pending' ? `
-            <button onclick="decideApplication(${app.id}, 'approved')" class="btn">Approve</button>
-            <button onclick="decideApplication(${app.id}, 'rejected')" class="btn">Reject</button>
-          ` : `<span class="badge">${app.status.toUpperCase()}</span>`}
-        </div>
-        <hr>
-      `;
-      applicationList.appendChild(div);
-    });
-  } catch (error) {
-    console.error('Error loading applications:', error);
-    document.getElementById('applicationList').innerHTML = "<p>Failed to load applications.</p>";
-  }
+  applications.forEach(app => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <p><b>Student ID:</b> ${app.studentId}</p>
+      <p><b>Room Preference:</b> ${app.roomPreference}</p>
+      <p><b>Details:</b> ${app.personalDetails}</p>
+      <p><b>Status:</b> ${app.status}</p>
+      <button onclick="decideApplication(${app.id}, 'approved')" class="btn">Approve</button>
+      <button onclick="decideApplication(${app.id}, 'rejected')" class="btn">Reject</button>
+      <hr>
+    `;
+    applicationList.appendChild(div);
+  });
 }
 
-// Decide Approve/Reject
+// Decision on application
 async function decideApplication(id, decision) {
   const response = await fetch(`${backendURL}/api/application/${id}/decision`, {
     method: 'POST',
@@ -46,9 +31,21 @@ async function decideApplication(id, decision) {
   });
 
   if (response.ok) {
-    alert(`Application ${decision}!`);
-    loadApplications(); // Refresh
+    alert(`Application ${decision}`);
+    loadApplications();
   } else {
     alert('Failed to update application.');
   }
 }
+
+// Load immediately
+if (document.getElementById('applicationList')) {
+  loadApplications();
+}
+
+//Logout function
+function logout() {
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+  }
+  
